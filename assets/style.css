@@ -1,0 +1,38 @@
+    :root{--card-w:520px;--card-h:500px;--radius:14px}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;display:flex;align-items:top;justify-content:center;min-height:100vh;margin:0;background:linear-gradient(180deg,#f6f7fb,#101f41)}/*135deg; #e9f0ff*/
+    .m_header{margin-bottom: 15px; margin-top: 20px; text-align: center;}
+    .m_header h2 {color: #101f41; font-weight: normal;}
+    .rounded{border-radius: 50%; width: 150px;}
+    .scene{width:var(--card-w);height:var(--card-h);perspective:1200px}
+    .card{
+      width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.9,.3,1);
+      border-radius:var(--radius);box-shadow:0 10px 30px rgba(18,25,50,.12);overflow:visible;
+    }
+    .card.is-flipped{transform:rotateY(180deg)}
+
+    .face{
+      position:absolute;inset:0;border-radius:inherit;backface-visibility:hidden;display:flex;/*align-items:center;justify-content:center;*/padding:18px;
+      color:#10203a
+    }
+
+    .face img {position: relative; width: 100%;}
+    .face p {margin:  15px auto;}
+    .face p a{text-decoration: none; color: #033dc4;font-weight: bolder;}
+    .face p a:hover{text-decoration: underline; color: #101f41;}
+    .face.front{background:linear-gradient(180deg,#fff,#f7fbff);border:1px solid rgba(16,32,58,.06)}
+    .face.back{background:linear-gradient(180deg,#fffbf7,#fff6ee);transform:rotateY(180deg);border:1px solid rgba(16,32,58,.04)}
+
+    .content{max-width:100%;/*text-align:center*/}
+    h2{margin:.25rem 0 .5rem;font-size:1.1rem}
+    p{margin:0;font-size:.95rem;opacity:.86}
+
+    .controls{display:flex;gap:8px;justify-content:center;margin-top:14px}
+    button{
+      appearance:none;border:0;padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;
+      box-shadow:0 6px 14px rgba(16,32,58,.08);background:#fff
+    }
+    button:active{transform:translateY(1px)}
+
+    /* small responsive tweak */
+    @media (max-width:420px){:root{--card-w:92vw}}

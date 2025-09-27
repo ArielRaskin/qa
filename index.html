@@ -1,21 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./scripts/main.js" type="module"></script>
-    <style>
-        .pink {
-            display: inline-block;
-            height: 100px;
-            width: 100px;
-            background-color: pink;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For QA course</title>
+ <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <h1>hello</h1>
-    <div class="pink"></div>
+  <main>
+    <div class="scene" aria-label="3D flip card demo">
+        <div class="m_header">
+                <img class="rounded" src="images/ar-anim.jpg">
+                <h2>About my two hobbies</h2>
+        </div>
+      <div id="card" class="card" role="group" aria-labelledby="cardTitle" aria-describedby="cardDesc">
+        <section class="face front" id="frontFace">
+          <div class="content">
+            <h2 id="cardTitle">Climbing</h2>
+            <img src="images/climb1.png">
+            <p id="cardDesc">I love climbing because it makes me feel alive and connected to both my body and nature. Every route is a new challenge, pushing me to test my strength, focus, and problem-solving skills. Reaching the top fills me with a sense of freedom and accomplishment, while the journey upward reminds me to stay present and determined.</p>
+            <div class="controls">
+                <br>
+              <button id="flipBtn" aria-pressed="false" aria-controls="card">Flip</button>
+              <!-- <button id="flipKeyboard" title="Flip using keyboard" aria-hidden="true">Flip (Enter)</button> -->
+            </div>
+          </div>
+        </section>
+
+        <section class="face back" id="backFace">
+          <div class="content">
+            <h2>Tea</h2>
+            <img src="images/tea1.png">
+            <p>For me tea is not just a product, it is an age-old tradition, the richest culture and a life style. 
+                I will be glad to share with you my love of tea. It is fascinating to explore the secrets of this amazing world! 
+                I hope you will start your journey into the world of tea, with iTea as your true and experienced guide. 
+                Together we will be able to find the right way (Dao) to tea. It is waiting for you.</p>
+            <p><a href="https://itea.co.il/en/" target="_blank">Real chinese tea in Israel</a></p>
+            <div class="controls">
+              <button id="unflipBtn" aria-pressed="true" aria-controls="card">Flip Back</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Simple flip-card script. Accessible + keyboard friendly.
+    const card = document.getElementById('card');
+    const flipBtn = document.getElementById('flipBtn');
+    const unflipBtn = document.getElementById('unflipBtn');
+
+    function setFlipped(isFlipped){
+      card.classList.toggle('is-flipped', isFlipped);
+      flipBtn.setAttribute('aria-pressed', String(isFlipped));
+      unflipBtn.setAttribute('aria-pressed', String(isFlipped));
+    }
+
+    flipBtn.addEventListener('click', ()=> setFlipped(true));
+    unflipBtn.addEventListener('click', ()=> setFlipped(false));
+
+    // Allow Enter/Space to flip when focused on the card container
+    card.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        setFlipped(!card.classList.contains('is-flipped'));
+      }
+    });
+
+    // Make card focusable for keyboard control
+    card.tabIndex = 0;
+
+    // Optional: click on card itself toggles flip (uncomment to enable)
+    // card.addEventListener('click', ()=> setFlipped(!card.classList.contains('is-flipped')));
+
+    // Initialize state (front side visible)
+    setFlipped(false);
+  </script>
 </body>
 </html>
